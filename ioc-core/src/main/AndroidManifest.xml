@@ -1,5 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uk.co.rossbeazley.ioc_core">
 
-    /
+    <application>
+        <!-- i wasted too much time trying to get this to work in the test manifest so suck it up for now -->
+        <activity android:name=".ThingActivity"/>
+    </application>
+
+
 </manifest>
