@@ -14,12 +14,12 @@ import org.junit.Test
 
 class CreatedActivityInjectedWithDependencies {
 
-    private lateinit var ioCContainer: IoCContainer
+    private lateinit var ioCContainer: CaptuingMockIoCContainer
 
     @Before
     fun registersIoCContainer() {
 
-        ioCContainer = IoCContainer()
+        ioCContainer = CaptuingMockIoCContainer()
         var activityIoCContainer = ActivityIoCContainer(ioCContainer)
 
         val applicationContext = getInstrumentation().targetContext.applicationContext as Application
@@ -29,13 +29,12 @@ class CreatedActivityInjectedWithDependencies {
     @Test
     fun createdActivityIsPresentedForDependecyInjection() {
 
-        val specificThing = Thing()
-        ioCContainer.register(specificThing)
-
         val intent = Intent(Intent.ACTION_VIEW)
         activityTestRule.launchActivity(intent)
 
-        assertThat(activityTestRule.activity.thing, `is`(specificThing))
+        val target = ioCContainer.target as? ThingActivity
+        assertThat(target, `is`(activityTestRule.activity))
+
     }
 
     @Rule
@@ -45,7 +44,6 @@ class CreatedActivityInjectedWithDependencies {
 
 
     class ActivityIoCContainer(private val ioCContainer: IoCContainer) : Application.ActivityLifecycleCallbacks {
-        private lateinit var thing: Thing
 
         override fun onActivityCreated(p0: Activity, p1: Bundle?) {
             ioCContainer.injectDependencies(p0)
@@ -61,15 +59,15 @@ class CreatedActivityInjectedWithDependencies {
 
     }
 
-    class IoCContainer {
-        private lateinit var thing: Thing
+    class CaptuingMockIoCContainer : IoCContainer {
 
-        fun register(thing: Thing) {
-            this.thing = thing
-        }
+        lateinit var target : Any
 
-        fun injectDependencies(into: Any) {
-            (into as ThingActivity).thing = thing
+        override fun register(thing: Thing) = Unit
+
+        override fun injectDependencies(into: Any) {
+            target = into
         }
     }
+
 }
