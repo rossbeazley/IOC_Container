@@ -3,6 +3,7 @@ package uk.co.rossbeazley.ioc_core
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert
 import org.junit.Test
+import uk.co.rossbeazley.ioc_core.NeedsAThing as NeedsAThing
 
 class CanInjectIntoInstances {
 
@@ -42,14 +43,27 @@ class SimpleIoCContainer : IoCContainer {
     }
 
     override fun injectDependencies(into: Any) {
-        (into as SomethingThatNeedsAThing).thing = thing
+        (into as NeedsAThing).thing = thing
     }
 }
 
-class SomethingThatNeedsAThing {
-    lateinit var thing: Thing
+class SomethingThatNeedsAThing : NeedsAThing {
+    override var thing: Thing
+        get() = thingStorage
+        set(value) {thingStorage=value}
+
+    lateinit var thingStorage: Thing
 }
 
-class SomethingElseThatNeedsAThing {
-    lateinit var thing: Thing
+class SomethingElseThatNeedsAThing  : NeedsAThing {
+    override var thing: Thing
+        get() = thingStorage
+        set(value) {thingStorage=value}
+
+    lateinit var thingStorage: Thing
+
+}
+
+interface NeedsAThing {
+    var thing: Thing
 }
