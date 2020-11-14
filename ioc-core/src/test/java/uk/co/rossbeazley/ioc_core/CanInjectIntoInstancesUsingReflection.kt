@@ -3,8 +3,6 @@ package uk.co.rossbeazley.ioc_core
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert
 import org.junit.Test
-import kotlin.reflect.KMutableProperty1
-import kotlin.reflect.full.memberProperties
 
 class CanInjectIntoInstancesUsingReflection {
 
@@ -62,12 +60,14 @@ class ReflectionIoCContainer : IoCContainer {
     }
 
     override fun injectDependencies(into: Any) {
-        val clz = into::class
-        clz.memberProperties.forEach {
-            val setter =  it as KMutableProperty1<Any, Thing>
-            setter.set(into, thing)
-        }
+        val clz = into::class.java
 
+        clz.fields.forEach {
+            when(it.type) {
+                Thing::class.java -> it.set(into, thing)
+                OtherThing::class.java -> it.set(into, otherThing)
+            }
+        }
     }
 }
 
