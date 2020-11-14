@@ -48,26 +48,16 @@ class CanInjectIntoInstancesUsingReflection {
 }
 
 class ReflectionIoCContainer : IoCContainer {
-    private lateinit var thing: Thing
-    private lateinit var otherThing: OtherThing
 
-    override fun register(thing: Any) {
-        when(thing) {
-            is Thing -> this.thing = thing
-            is OtherThing -> this.otherThing = thing
-        }
+    private val things = mutableMapOf<Class<out Any>,Any>()
+    override fun register(specificThing: Any) {
+        things[specificThing::class.java] = specificThing
     }
 
-
     override fun injectDependencies(into: Any) {
-        val clz = into::class.java
-
-        clz.fields.forEach {
-            when(it.type) {
-                Thing::class.java -> it.set(into, thing)
-                OtherThing::class.java -> it.set(into, otherThing)
-            }
-        }
+        into::class.java.fields
+            .filter { things.containsKey(it.type) }
+            .forEach { it.set(into,things[it.type]) }
     }
 }
 
