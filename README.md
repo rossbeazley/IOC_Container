@@ -27,4 +27,5 @@ To further drive out the implementation of this container a second type of injec
 Up until now we have used simple single references of dependencies, the onus is on the client developer to instanciate this and register with the container.
 If we have some simple type maybe the developer wont need to register them with the container, for example a presenter (as in MVP) might be stateless and only mediate and adapt messages between the view and the domain model.
 In the first pass we can get instantion working but the thing that is interesting here is when that type needs another dependency itself.
+Additionally we probably dont want to automatically inject instances into every field so we could let the client developer annotate which fields are managed
 
