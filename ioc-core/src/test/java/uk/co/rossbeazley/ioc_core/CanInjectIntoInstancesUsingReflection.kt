@@ -55,9 +55,13 @@ class ReflectionIoCContainer : IoCContainer {
     }
 
     override fun injectDependencies(into: Any) {
-        into::class.java.fields
-            .filter { things.containsKey(it.type) }
-            .forEach { it.set(into,things[it.type]) }
+        val (known, unkown) = into::class.java.fields
+            .partition { things.containsKey(it.type) }
+
+        known.forEach { it.set(into,things[it.type]) }
+        unkown.forEach {
+            it.set(into,it.type.newInstance())
+        }
     }
 }
 
