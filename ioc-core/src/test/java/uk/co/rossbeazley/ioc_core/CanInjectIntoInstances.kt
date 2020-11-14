@@ -42,6 +42,10 @@ class SimpleIoCContainer : IoCContainer {
         this.thing = thing
     }
 
+    override fun register(otherThing: OtherThing) {
+        TODO("Not yet implemented")
+    }
+
     override fun injectDependencies(into: Any) {
         (into as NeedsAThing).thing = thing
     }

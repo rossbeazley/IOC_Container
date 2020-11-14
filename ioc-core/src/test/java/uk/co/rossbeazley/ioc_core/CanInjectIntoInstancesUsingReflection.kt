@@ -3,12 +3,8 @@ package uk.co.rossbeazley.ioc_core
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert
 import org.junit.Test
-import kotlin.reflect.KFunction
 import kotlin.reflect.KMutableProperty1
-import kotlin.reflect.KProperty
-import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
-import uk.co.rossbeazley.ioc_core.NeedsAThing as NeedsAThing
 
 class CanInjectIntoInstancesUsingReflection {
 
@@ -38,13 +34,31 @@ class CanInjectIntoInstancesUsingReflection {
 
         Assert.assertThat(somethingElseThatNeedsAThing.thing, `is`(specificThing))
     }
+
+    @Test
+    fun injectingSomeOtherTypeOfThing() {
+        val ioCContainer = ReflectionIoCContainer()
+
+        val otherThing = OtherThing()
+        ioCContainer.register(otherThing)
+
+        val totherNeedyThing = ThisThingNeedsAnotherThingSimple()
+        ioCContainer.injectDependencies(into = totherNeedyThing)
+
+        Assert.assertThat(totherNeedyThing.thing, `is`(otherThing))
+    }
 }
 
 class ReflectionIoCContainer : IoCContainer {
     private lateinit var thing: Thing
+    private lateinit var otherThing: OtherThing
 
     override fun register(thing: Thing) {
         this.thing = thing
+    }
+
+    override fun register(otherThing: OtherThing) {
+        this.otherThing = otherThing
     }
 
     override fun injectDependencies(into: Any) {
@@ -63,4 +77,9 @@ class SomethingThatNeedsAThingSimple {
 
 class SomethingElseThatNeedsAThingSimple {
     lateinit var thing: Thing
+}
+
+
+class ThisThingNeedsAnotherThingSimple {
+    lateinit var thing: OtherThing
 }

@@ -64,6 +64,9 @@ class CreatedActivityInjectedWithDependencies {
         lateinit var target : Any
 
         override fun register(thing: Thing) = Unit
+        override fun register(otherThing: OtherThing) {
+            TODO("Not yet implemented")
+        }
 
         override fun injectDependencies(into: Any) {
             target = into

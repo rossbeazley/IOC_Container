@@ -7,3 +7,4 @@ class ThingActivity : Activity() {
 }
 
 class Thing{}
+class OtherThing{}
