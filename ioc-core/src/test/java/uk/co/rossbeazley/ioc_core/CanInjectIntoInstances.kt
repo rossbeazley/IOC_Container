@@ -18,6 +18,20 @@ class CanInjectIntoInstances {
 
         Assert.assertThat(somethingThatNeedsAThing.thing, `is`(specificThing))
     }
+
+
+    @Test
+    fun theOneWhereAnotherInstanceTypeHasDependenciesInjectedThroughSetters() {
+        val ioCContainer = SimpleIoCContainer()
+        val somethingElseThatNeedsAThing = SomethingElseThatNeedsAThing()
+
+        val specificThing = Thing()
+        ioCContainer.register(specificThing)
+
+        ioCContainer.injectDependencies(into = somethingElseThatNeedsAThing)
+
+        Assert.assertThat(somethingElseThatNeedsAThing.thing, `is`(specificThing))
+    }
 }
 
 class SimpleIoCContainer : IoCContainer {
@@ -33,5 +47,9 @@ class SimpleIoCContainer : IoCContainer {
 }
 
 class SomethingThatNeedsAThing {
+    lateinit var thing: Thing
+}
+
+class SomethingElseThatNeedsAThing {
     lateinit var thing: Thing
 }
