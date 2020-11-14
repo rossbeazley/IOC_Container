@@ -13,4 +13,9 @@ The implications to date so far are:
   3. We instantly have tech debt with the use of activity test rule but we can make the system more functional and come back to this after we have something approaching MVP
 
 Next up we can move to pure JVM land and drive out futher features around IoCContainer leaving ActivityIoCContainer for now
+ - realised that the android code could be simplified further, its acting as an adaptor more than anything integrating into the system components
+ - moved the feature test to jvm tests leaving behind a test to show mediation of the "injection" usecase for activities
+
+Next up we work on making injection of Thing dependencies work for any type of object that needs a Thing ie remove the cast in the IoCContainer
+
 
