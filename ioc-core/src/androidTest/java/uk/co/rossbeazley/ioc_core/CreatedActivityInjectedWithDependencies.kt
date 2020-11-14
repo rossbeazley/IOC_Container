@@ -20,11 +20,14 @@ class CreatedActivityInjectedWithDependencies {
 
 
     private lateinit var activityIoCContainer: ActivityIoCContainer
+    private lateinit var ioCContainer: IoCContainer
 
     @Before
     fun registersIoCContainer() {
 
-        activityIoCContainer = ActivityIoCContainer()
+
+        ioCContainer = IoCContainer()
+        activityIoCContainer = ActivityIoCContainer(ioCContainer)
 
         val applicationContext = getInstrumentation().targetContext.applicationContext as Application
         applicationContext.registerActivityLifecycleCallbacks(activityIoCContainer)
@@ -34,7 +37,7 @@ class CreatedActivityInjectedWithDependencies {
     fun createdActivityIsPresentedForDependecyInjection() {
 
         val specificThing = Thing()
-        activityIoCContainer.register(specificThing)
+        ioCContainer.register(specificThing)
 
         val intent = Intent(Intent.ACTION_VIEW)
         activityTestRule.launchActivity(intent)
@@ -43,11 +46,11 @@ class CreatedActivityInjectedWithDependencies {
     }
 
 
-    class ActivityIoCContainer : Application.ActivityLifecycleCallbacks {
+    class ActivityIoCContainer(private val ioCContainer: IoCContainer) : Application.ActivityLifecycleCallbacks {
         private lateinit var thing: Thing
 
         override fun onActivityCreated(p0: Activity, p1: Bundle?) {
-            (p0 as ThingActivity).thing = thing
+            ioCContainer.injectDependencies(p0)
         }
 
         override fun onActivityPaused(p0: Activity) {}
@@ -57,9 +60,18 @@ class CreatedActivityInjectedWithDependencies {
         override fun onActivityStopped(p0: Activity) {}
         override fun onActivityResumed(p0: Activity) {}
 
+
+    }
+
+    class IoCContainer {
+        private lateinit var thing: Thing
+
         fun register(thing: Thing) {
             this.thing = thing
         }
 
+        fun injectDependencies(into: Any) {
+            (into as ThingActivity).thing = thing
+        }
     }
 }
