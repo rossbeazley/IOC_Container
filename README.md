@@ -22,4 +22,9 @@ Next up we work on making injection of Thing dependencies work for any type of o
 
 To further drive out the implementation of this container a second type of injectable will be introduced, for now we are just dealing with eagerly constructed singletons.
  - In the first pass we add an overloaded method, the IoC container can still only deal with known types, clearly no good for production. The next step is to make the IoC container deail with Any type
+ - the over loaded method is now gone and we can operate on Any types of dependency instances
+
+Up until now we have used simple single references of dependencies, the onus is on the client developer to instanciate this and register with the container.
+If we have some simple type maybe the developer wont need to register them with the container, for example a presenter (as in MVP) might be stateless and only mediate and adapt messages between the view and the domain model.
+In the first pass we can get instantion working but the thing that is interesting here is when that type needs another dependency itself.
 
