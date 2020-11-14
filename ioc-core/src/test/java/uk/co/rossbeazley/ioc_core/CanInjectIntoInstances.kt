@@ -38,12 +38,8 @@ class CanInjectIntoInstances {
 class SimpleIoCContainer : IoCContainer {
     private lateinit var thing: Thing
 
-    override fun register(thing: Thing) {
-        this.thing = thing
-    }
-
-    override fun register(otherThing: OtherThing) {
-        TODO("Not yet implemented")
+    override fun register(thing: Any) {
+        if (thing is Thing) this.thing = thing
     }
 
     override fun injectDependencies(into: Any) {

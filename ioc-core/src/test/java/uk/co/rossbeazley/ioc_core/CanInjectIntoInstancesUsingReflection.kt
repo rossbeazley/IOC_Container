@@ -51,13 +51,13 @@ class ReflectionIoCContainer : IoCContainer {
     private lateinit var thing: Thing
     private lateinit var otherThing: OtherThing
 
-    override fun register(thing: Thing) {
-        this.thing = thing
+    override fun register(thing: Any) {
+        when(thing) {
+            is Thing -> this.thing = thing
+            is OtherThing -> this.otherThing = thing
+        }
     }
 
-    override fun register(otherThing: OtherThing) {
-        this.otherThing = otherThing
-    }
 
     override fun injectDependencies(into: Any) {
         val clz = into::class.java

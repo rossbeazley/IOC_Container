@@ -1,8 +1,7 @@
 package uk.co.rossbeazley.ioc_core
 
 interface IoCContainer {
-    fun register(specificThing: Thing)
-    fun register(otherThing: OtherThing)
+    fun register(specificThing: Any)
     fun injectDependencies(into: Any)
 
 }
