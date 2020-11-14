@@ -17,5 +17,9 @@ Next up we can move to pure JVM land and drive out futher features around IoCCon
  - moved the feature test to jvm tests leaving behind a test to show mediation of the "injection" usecase for activities
 
 Next up we work on making injection of Thing dependencies work for any type of object that needs a Thing ie remove the cast in the IoCContainer
+ - In the first attempt (SimpleIoCContainer) a role interface was extracted, the client developer should implement this interface to declare the instance needs a dependency. This looks to result in a large amount of boilerplate.
+ - In the second attempt (ReflectionIoCContainer) we use a bit of reflection to access the property setter (the code is incorrect at this time but we get to see what the client api looks like early on). The client developer code is much cleaner now.
+
+To further drive out the implementation of this container a second type of injectable will be introduced, for now we are just dealing with eagerly constructed singletons.
 
 
