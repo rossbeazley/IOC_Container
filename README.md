@@ -21,5 +21,5 @@ Next up we work on making injection of Thing dependencies work for any type of o
  - In the second attempt (ReflectionIoCContainer) we use a bit of reflection to access the property setter (the code is incorrect at this time but we get to see what the client api looks like early on). The client developer code is much cleaner now.
 
 To further drive out the implementation of this container a second type of injectable will be introduced, for now we are just dealing with eagerly constructed singletons.
-
+ - In the first pass we add an overloaded method, the IoC container can still only deal with known types, clearly no good for production. The next step is to make the IoC container deail with Any type
 
