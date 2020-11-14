@@ -44,8 +44,10 @@ class CreatedActivityInjectedWithDependencies {
 
 
     class ActivityIoCContainer : Application.ActivityLifecycleCallbacks {
-        override fun onActivityCreated(p0: Activity, p1: Bundle?) {
+        private lateinit var thing: Thing
 
+        override fun onActivityCreated(p0: Activity, p1: Bundle?) {
+            (p0 as ThingActivity).thing = thing
         }
 
         override fun onActivityPaused(p0: Activity) {}
@@ -56,7 +58,7 @@ class CreatedActivityInjectedWithDependencies {
         override fun onActivityResumed(p0: Activity) {}
 
         fun register(thing: Thing) {
-
+            this.thing = thing
         }
 
     }
