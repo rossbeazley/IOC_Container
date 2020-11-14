@@ -14,20 +14,13 @@ import org.junit.Test
 
 class CreatedActivityInjectedWithDependencies {
 
-    @Rule
-    @JvmField               /** ick, deprecated :S, lets add to the TODO list */
-    var activityTestRule = ActivityTestRule(ThingActivity::class.java, false,false)
-
-
-    private lateinit var activityIoCContainer: ActivityIoCContainer
     private lateinit var ioCContainer: IoCContainer
 
     @Before
     fun registersIoCContainer() {
 
-
         ioCContainer = IoCContainer()
-        activityIoCContainer = ActivityIoCContainer(ioCContainer)
+        var activityIoCContainer = ActivityIoCContainer(ioCContainer)
 
         val applicationContext = getInstrumentation().targetContext.applicationContext as Application
         applicationContext.registerActivityLifecycleCallbacks(activityIoCContainer)
@@ -44,6 +37,11 @@ class CreatedActivityInjectedWithDependencies {
 
         assertThat(activityTestRule.activity.thing, `is`(specificThing))
     }
+
+    @Rule
+    @JvmField               /** ick, deprecated :S, lets add to the TODO list */
+    var activityTestRule = ActivityTestRule(ThingActivity::class.java, false,false)
+
 
 
     class ActivityIoCContainer(private val ioCContainer: IoCContainer) : Application.ActivityLifecycleCallbacks {
