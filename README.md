@@ -5,3 +5,12 @@ exploring an android ioc container
 
 - given an activity is created, can we inject simple dependencies based off of class type
 
+Some basic functionality has been implemented, to start to drive out the system.
+The implications to date so far are:
+  1. The application will need to register an activity lifecycle callback object and build up the IoC container.
+     This is less than ideal at the moment and we can refactor towards an easier dev experience.
+  2. There is no magic (so far?)
+  3. We instantly have tech debt with the use of activity test rule but we can make the system more functional and come back to this after we have something approaching MVP
+
+Next up we can move to pure JVM land and drive out futher features around IoCContainer leaving ActivityIoCContainer for now
+
