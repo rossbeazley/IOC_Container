@@ -46,6 +46,9 @@ After a bit of a code re-org, moving fakes into one clump and bringing the Refle
  - lets detect a cycle and throw an error
 
 
+ --- Decided to stop at this point and submit first thing in the morning, will need to knock up a quick example to make it clear how to use
+
+
 
 
 
