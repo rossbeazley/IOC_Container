@@ -1,8 +1,7 @@
 package uk.co.rossbeazley.ioc_core
 
 import org.hamcrest.CoreMatchers.`is`
-import org.junit.Assert
-import org.junit.Assert.*
+import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 

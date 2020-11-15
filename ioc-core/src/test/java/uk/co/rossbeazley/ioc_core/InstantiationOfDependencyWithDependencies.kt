@@ -1,7 +1,7 @@
 package uk.co.rossbeazley.ioc_core
 
-import org.hamcrest.CoreMatchers.*
-import org.junit.Assert
+import org.hamcrest.CoreMatchers.notNullValue
+import org.junit.Assert.assertThat
 import org.junit.Test
 
 class InstantiationOfDependencyWithDependencies {
@@ -13,8 +13,8 @@ class InstantiationOfDependencyWithDependencies {
         val usesUnregisteredThing = WillHaveThingWithDependenciesInjectedIn()
         ioCContainer.injectDependencies(into = usesUnregisteredThing)
 
-        Assert.assertThat(usesUnregisteredThing.thingWithDependencies, notNullValue())
-        Assert.assertThat(usesUnregisteredThing.thingWithDependencies.dependency, notNullValue())
+        assertThat(usesUnregisteredThing.thingWithDependencies, notNullValue())
+        assertThat(usesUnregisteredThing.thingWithDependencies.dependency, notNullValue())
     }
 
 }

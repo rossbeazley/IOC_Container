@@ -1,7 +1,8 @@
 package uk.co.rossbeazley.ioc_core
 
-import org.hamcrest.CoreMatchers.*
-import org.junit.Assert
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.nullValue
+import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 
@@ -22,7 +23,7 @@ class InstantiationWithoutRegistration {
         val usesUnregisteredThing = WillHaveUnregisteredThingInjectedIn()
         ioCContainer.injectDependencies(into = usesUnregisteredThing)
 
-        Assert.assertThat(usesUnregisteredThing.unregisteredThing, notNullValue())
+        assertThat(usesUnregisteredThing.unregisteredThing, notNullValue())
     }
 
     @Test
@@ -30,7 +31,7 @@ class InstantiationWithoutRegistration {
         val usesUnregisteredThing = WillHaveUnregisteredThingInjectedIn()
         ioCContainer.injectDependencies(into = usesUnregisteredThing)
 
-        Assert.assertThat(usesUnregisteredThing.secret(), nullValue())
+        assertThat(usesUnregisteredThing.secret(), nullValue())
     }
 
 }
