@@ -32,4 +32,8 @@ Additionally we probably dont want to automatically inject instances into every 
 For now however we could just inject only public properties and ignore annotations.
 
 
+Now we turn to instantiating an instance where the constructor needs paramaters.
+ - First a dependency that relies on a simple type eg a String but it could be a Logger for example
+
+
 
