@@ -13,8 +13,8 @@ class InstantiationOfDependencyWithDependencies {
         val usesUnregisteredThing = WillHaveThingWithDependenciesInjectedIn()
         ioCContainer.injectDependencies(into = usesUnregisteredThing)
 
-        Assert.assertThat(usesUnregisteredThing.thing, notNullValue())
-        Assert.assertThat(usesUnregisteredThing.thing.string, notNullValue())
+        Assert.assertThat(usesUnregisteredThing.thingWithDependencies, notNullValue())
+        Assert.assertThat(usesUnregisteredThing.thingWithDependencies.dependency, notNullValue())
     }
 
 }

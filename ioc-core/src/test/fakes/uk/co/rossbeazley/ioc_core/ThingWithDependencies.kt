@@ -1,3 +1,3 @@
 package uk.co.rossbeazley.ioc_core
 
-class ThingWithDependencies(val string : String) {}
+class ThingWithDependencies(val dependency : String) {}
