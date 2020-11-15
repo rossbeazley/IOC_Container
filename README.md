@@ -40,6 +40,11 @@ After a bit of a code re-org, moving fakes into one clump and bringing the Refle
 ~Now its time to think of cyclic dependencies~
  - Next we have a dependency that uses one of the registered singlton instances
 
+ - now to try cyclic dependency, its about now i realise that i havnt thought about interface types at all
+   so that probably means cyclic class type dependencies between constructors is impossible unless we use cglib or similar
+   however this still wont work with final classes which are default in kotlin.
+ - lets detect a cycle and throw an error
+
 
 
 
