@@ -19,10 +19,29 @@ class InstantiationWithoutRegistration {
         Assert.assertThat(usesUnregisteredThing.thing, notNullValue())
     }
 
+    @Test
+    fun privatePropertiesAreIgnored() {
+        val ioCContainer = ReflectionIoCContainer()
+
+        val specificThing = Thing()
+        ioCContainer.register(specificThing)
+
+        val usesUnregisteredThing = WillHaveUnregisteredThingInjectedIn()
+        ioCContainer.injectDependencies(into = usesUnregisteredThing)
+
+        Assert.assertThat(usesUnregisteredThing.secret(), nullValue())
+    }
+
 }
 
 class UnregisteredThing {}
 
 class WillHaveUnregisteredThingInjectedIn {
     lateinit var thing : UnregisteredThing
+    private var secretthing : UnregisteredThing? = null
+    
+    fun secret() : UnregisteredThing? {
+        return secretthing
+    }
+    
 }
