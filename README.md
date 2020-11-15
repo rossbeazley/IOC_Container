@@ -37,7 +37,8 @@ Now we turn to instantiating an instance where the constructor needs paramaters.
 
 After a bit of a code re-org, moving fakes into one clump and bringing the ReflectionIioCContainer to the top level, I delete the older simplistic IoCContainer in the CanInjectIntoInstances.kt file
 
-Now its time to think of cyclic dependencies
+~Now its time to think of cyclic dependencies~
+ - Next we have a dependency that uses one of the registered singlton instances
 
 
 
