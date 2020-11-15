@@ -34,14 +34,3 @@ class InstantiationWithoutRegistration {
 
 }
 
-class UnregisteredThing {}
-
-class WillHaveUnregisteredThingInjectedIn {
-    lateinit var thing : UnregisteredThing
-    private var secretthing : UnregisteredThing? = null
-    
-    fun secret() : UnregisteredThing? {
-        return secretthing
-    }
-    
-}

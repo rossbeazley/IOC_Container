@@ -19,8 +19,3 @@ class InstantiationOfDependencyWithDependencies {
 
 }
 
-class ThingWithDependencies(val string : String) {}
-
-class WillHaveThingWithDependenciesInjectedIn {
-    lateinit var thing : ThingWithDependencies
-}
