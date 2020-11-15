@@ -14,7 +14,7 @@ class CanInjectIntoInstancesUsingReflection {
     fun iOCContainerWithRegisteredDependencies() {
         ioCContainer = ReflectionIoCContainer()
         specificThing = Thing()
-        ioCContainer.register(specificThing)
+        ioCContainer.registerSingletonInstance(specificThing)
     }
 
 
@@ -37,7 +37,7 @@ class CanInjectIntoInstancesUsingReflection {
     fun injectingSomeOtherTypeOfThing() {
 
         val otherThing = OtherThing()
-        ioCContainer.register(otherThing)
+        ioCContainer.registerSingletonInstance(otherThing)
 
         val totherNeedyThing = ThisThingNeedsAnotherThingSimple()
         ioCContainer.injectDependencies(into = totherNeedyThing)

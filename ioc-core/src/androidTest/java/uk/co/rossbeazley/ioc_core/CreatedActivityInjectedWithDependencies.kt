@@ -63,7 +63,7 @@ class CreatedActivityInjectedWithDependencies {
 
         lateinit var target : Any
 
-        override fun register(thing: Any) = Unit
+        override fun registerSingletonInstance(thing: Any) = Unit
 
         override fun injectDependencies(into: Any) {
             target = into

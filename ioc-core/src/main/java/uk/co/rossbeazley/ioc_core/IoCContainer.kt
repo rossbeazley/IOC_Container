@@ -1,7 +1,7 @@
 package uk.co.rossbeazley.ioc_core
 
 interface IoCContainer {
-    fun register(specificThing: Any)
+    fun registerSingletonInstance(specificThing: Any)
     fun injectDependencies(into: Any)
 
 }

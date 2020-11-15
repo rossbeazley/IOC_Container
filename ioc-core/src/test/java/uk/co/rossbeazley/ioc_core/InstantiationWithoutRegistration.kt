@@ -13,7 +13,7 @@ class InstantiationWithoutRegistration {
     fun anIoCContainerWithRegisteredDependencies() {
         ioCContainer = ReflectionIoCContainer()
         val specificThing = Thing()
-        ioCContainer.register(specificThing)
+        ioCContainer.registerSingletonInstance(specificThing)
 
     }
 

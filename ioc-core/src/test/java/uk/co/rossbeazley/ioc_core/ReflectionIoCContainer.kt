@@ -3,7 +3,7 @@ package uk.co.rossbeazley.ioc_core
 class ReflectionIoCContainer : IoCContainer {
 
     private val things = mutableMapOf<Class<out Any>,Any>()
-    override fun register(specificThing: Any) {
+    override fun registerSingletonInstance(specificThing: Any) {
         things[specificThing::class.java] = specificThing
     }
 
