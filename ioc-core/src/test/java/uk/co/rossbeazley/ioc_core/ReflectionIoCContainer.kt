@@ -26,7 +26,12 @@ class ReflectionIoCContainer : IoCContainer {
             1 -> {
                 val constructor = declaredConstructors[0]
                 val args = constructor.parameterTypes
-                    .map {it.newInstance()}
+                    .map {
+                        when(things.containsKey(it)) {
+                            true -> things[it]
+                            false -> it.newInstance()
+                        }
+                    }
                     .toTypedArray()
                 constructor.newInstance(*args)
             }
