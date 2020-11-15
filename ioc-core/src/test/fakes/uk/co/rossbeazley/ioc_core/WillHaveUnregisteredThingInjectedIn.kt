@@ -1,7 +1,7 @@
 package uk.co.rossbeazley.ioc_core
 
 class WillHaveUnregisteredThingInjectedIn {
-    lateinit var thing : UnregisteredThing
+    lateinit var unregisteredThing : UnregisteredThing
     private var secretthing : UnregisteredThing? = null
 
     fun secret() : UnregisteredThing? {
