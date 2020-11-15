@@ -35,5 +35,11 @@ For now however we could just inject only public properties and ignore annotatio
 Now we turn to instantiating an instance where the constructor needs paramaters.
  - First a dependency that relies on a simple type eg a String but it could be a Logger for example
 
+After a bit of a code re-org, moving fakes into one clump and bringing the ReflectionIioCContainer to the top level, I delete the older simplistic IoCContainer in the CanInjectIntoInstances.kt file
+
+Now its time to think of cyclic dependencies
+
+
+
 
 
