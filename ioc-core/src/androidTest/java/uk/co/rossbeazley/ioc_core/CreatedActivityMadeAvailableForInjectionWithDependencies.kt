@@ -12,7 +12,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class CreatedActivityInjectedWithDependencies {
+class CreatedActivityMadeAvailableForInjectionWithDependencies {
 
     private lateinit var ioCContainer: CaptuingMockIoCContainer
 
